@@ -28,10 +28,10 @@ fun TextFieldComponent(
             unfocusedContainerColor = Color(0xFF525252),
             unfocusedTextColor = Color.White,
             unfocusedIndicatorColor = Color(0xFF7AB317),
-
+            unfocusedPlaceholderColor = Color(0xFFE3E3E3)
         )
     )
-    if(spacerHeight != null)
-    Spacer(modifier = Modifier.height(spacerHeight))
-
+    if(spacerHeight != null) {
+        Spacer(modifier = Modifier.height(spacerHeight))
+    }
 }
