@@ -3,13 +3,16 @@ package com.example.sgprepartidor.core.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-object LoginClient
-
-@Serializable
-object LoginDelivery
+object Login
 
 @Serializable
 object RegisterClient
 
 @Serializable
 object RegisterDelivery
+
+@Serializable
+object ClientHome
+
+@Serializable
+object DeliveryHome

@@ -1,4 +1,4 @@
-package com.example.sgprepartidor.Register.Client.data
+package com.example.sgprepartidor.Register.Client.data.model
 
 data class RegisterClientDTO (
     val name: String,

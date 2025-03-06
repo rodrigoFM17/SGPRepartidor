@@ -1,15 +1,18 @@
 package com.example.sgprepartidor.Register.Client.presentation
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
-import com.example.sgprepartidor.Login.Client.data.model.LoginClientDTO
-import com.example.sgprepartidor.Register.Client.data.RegisterClientDTO
+import com.example.sgprepartidor.Register.Client.data.model.RegisterClientDTO
 import com.example.sgprepartidor.components.ButtonComponent
 import com.example.sgprepartidor.components.TextFieldComponent
 import com.example.sgprepartidor.layouts.Container
@@ -22,6 +25,7 @@ fun RegisterClientScreen(registerClientViewModel: RegisterClientViewModel) {
     val email by registerClientViewModel.email.observeAsState("")
     val address by registerClientViewModel.address.observeAsState("")
     val password by registerClientViewModel.password.observeAsState("")
+    val failure by registerClientViewModel.failure.observeAsState(false)
 
     Container(
         headerTitle = "Registro de Cliente",
@@ -57,8 +61,14 @@ fun RegisterClientScreen(registerClientViewModel: RegisterClientViewModel) {
             onValueChange = registerClientViewModel::onChangePassword,
             placeholder = "Ingresa tu contrasena",
             modifier = Modifier.fillMaxWidth(),
-            spacerHeight = 30.dp
+            spacerHeight = 10.dp
         )
+
+        if(failure){
+            Text( text = "Hubo un error al intentar iniciar sesion, intenta mas tarde", color = Color(0xFF3C3C3C))
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         ButtonComponent(
             onClick = {

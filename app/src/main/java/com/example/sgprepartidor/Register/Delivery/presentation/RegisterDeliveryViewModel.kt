@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sgprepartidor.Register.Delivery.data.model.RegisterDeliveryDTO
+import com.example.sgprepartidor.Register.Delivery.domain.RegisterDeliveryUseCase
 
-class RegisterDeliveryViewModel : ViewModel() {
+class RegisterDeliveryViewModel(private val navigateToLogin: () -> Unit) : ViewModel() {
+
+    val registerDeliveryUseCase = RegisterDeliveryUseCase()
 
     private val _firstName = MutableLiveData<String>()
     private val _lastName = MutableLiveData<String>()
@@ -13,11 +16,14 @@ class RegisterDeliveryViewModel : ViewModel() {
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
 
+    private val _failure = MutableLiveData<Boolean>()
+
     val firstName: LiveData<String> = _firstName
     val lastName: LiveData<String> = _lastName
     val driverId: LiveData<String> = _driverId
     val email: LiveData<String> = _email
     val password: LiveData<String> = _password
+    val failure: LiveData<Boolean> = _failure
 
     fun onChangeFirstName(firstName: String) {
         _firstName.value = firstName
@@ -40,6 +46,15 @@ class RegisterDeliveryViewModel : ViewModel() {
     }
 
     suspend fun onSubmit(registerDeliveryDTO: RegisterDeliveryDTO) {
+
+        val result = registerDeliveryUseCase(registerDeliveryDTO)
+        result.onSuccess {
+            navigateToLogin()
+        }
+
+        result.onFailure {
+            _failure.value = true
+        }
 
     }
 

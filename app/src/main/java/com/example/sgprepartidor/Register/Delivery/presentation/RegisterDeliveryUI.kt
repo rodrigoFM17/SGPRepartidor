@@ -2,6 +2,7 @@ package com.example.sgprepartidor.Register.Delivery.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -22,6 +23,7 @@ fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel)
     val driverId by registerDeliveryViewModel.driverId.observeAsState("")
     val email by registerDeliveryViewModel.email.observeAsState("")
     val password by registerDeliveryViewModel.password.observeAsState("")
+    val failure by registerDeliveryViewModel.failure.observeAsState(false)
 
     Container(
         headerTitle = "Registro de Repartidor",
@@ -65,8 +67,12 @@ fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel)
             onValueChange = registerDeliveryViewModel::onChangePassword,
             placeholder = "Ingresa tu contraseña",
             modifier = Modifier.fillMaxWidth(),
-            spacerHeight = 30.dp
+            spacerHeight = 10.dp
         )
+
+        if(failure){
+            Text( text = "Hubo un error al intentar registrarte, intenta mas tarde")
+        }
 
         ButtonComponent(
             onClick = { registerDeliveryViewModel.viewModelScope.launch {
