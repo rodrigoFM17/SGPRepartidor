@@ -16,3 +16,6 @@ object ClientHome
 
 @Serializable
 object DeliveryHome
+
+@Serializable
+object SupplierProducts

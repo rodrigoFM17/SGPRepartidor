@@ -18,8 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import com.example.sgprepartidor.Home.Delivery.data.model.DeliveryOrder
+import com.example.sgprepartidor.Home.Delivery.data.model.UpdateStatusDTO
 import com.example.sgprepartidor.layouts.Container
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeDeliveryScreen(homeDeliveryViewModel: HomeDeliveryViewModel) {
@@ -30,7 +33,11 @@ fun HomeDeliveryScreen(homeDeliveryViewModel: HomeDeliveryViewModel) {
         headerTitle = "Ordenes asignadas",
     ) {
         if(deliveryOrder != null) {
-            DeliveryOrderCard(deliveryOrder!!, homeDeliveryViewModel::)
+            DeliveryOrderCard(deliveryOrder!!, {
+                homeDeliveryViewModel.viewModelScope.launch {
+                    homeDeliveryViewModel.markDeliveryOrderAsCompleted(deliveryOrder!!.id, UpdateStatusDTO(status = "completed"))
+                }
+            })
         } else {
             Text(
                 text = "Aun no tienes un pedido asignado",
@@ -60,6 +67,8 @@ fun DeliveryOrderCard (deliveryOrder: DeliveryOrder, onClick: () -> Unit) {
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = onClick
-        ) { }
+        ) {
+            Text( text = "Marcar orden como completada")
+        }
     }
 }

@@ -76,13 +76,13 @@ fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel)
 
         ButtonComponent(
             onClick = { registerDeliveryViewModel.viewModelScope.launch {
-                registerDeliveryViewModel.onSubmit(RegisterDeliveryDTO(
+                registerDeliveryViewModel.onSubmit(
                     firstName = firstName,
                     lastName = lastName,
                     driverId = driverId,
                     email = email,
                     password = password
-                ))
+                )
             }},
             text = "Registrarse",
             modifier = Modifier.fillMaxWidth()

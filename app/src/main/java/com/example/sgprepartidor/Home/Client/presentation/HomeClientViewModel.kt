@@ -3,10 +3,14 @@ package com.example.sgprepartidor.Home.Client.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sgprepartidor.Home.Client.data.model.Supplier
 import com.example.sgprepartidor.Home.Client.domain.GetAllSuppliersUseCase
+import com.example.sgprepartidor.core.storage.StorageManager
+import com.example.sgprepartidor.model.Supplier
 
-class HomeClientViewModel : ViewModel() {
+class HomeClientViewModel(
+    private val navigateToSupplierProducts: () -> Unit,
+    private val supplierStorage: StorageManager<Supplier>
+) : ViewModel() {
 
     private val getAllSuppliersUseCase = GetAllSuppliersUseCase()
     private val _suppliers = MutableLiveData<List<Supplier>>()
@@ -27,8 +31,9 @@ class HomeClientViewModel : ViewModel() {
         }
     }
 
-    suspend fun onSelectSupplier (supplierId: String) {
-
+    fun onSelectSupplier (supplier: Supplier) {
+        supplierStorage.saveInStorage(supplier)
+        navigateToSupplierProducts()
     }
 
 

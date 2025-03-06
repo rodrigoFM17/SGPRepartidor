@@ -1,9 +1,8 @@
 package com.example.sgprepartidor.Register.Delivery.data.model
 
 data class RegisterDeliveryDTO(
-    val firstName: String,
-    val lastName: String,
-    val driverId: String,
+    val name: String,
     val email: String,
-    val password: String
+    val password: String,
+    val fcm_token: String
 )

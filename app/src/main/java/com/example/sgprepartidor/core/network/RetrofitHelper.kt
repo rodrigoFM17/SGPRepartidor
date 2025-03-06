@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
-    private const val BASE_URL = "http://3.229.240.157:3000/"
+    private const val BASE_URL = "http://52.70.14.255:3000/"
 
 
 

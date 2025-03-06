@@ -1,6 +1,5 @@
 package com.example.sgprepartidor.Register.data.datasource
 
-import com.example.sgprepartidor.Home.Client.data.model.Supplier
 import com.example.sgprepartidor.Login.data.model.Client
 import com.example.sgprepartidor.Login.data.model.Delivery
 import com.example.sgprepartidor.Register.Client.data.model.RegisterClientDTO

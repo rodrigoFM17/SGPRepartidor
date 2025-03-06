@@ -1,6 +1,6 @@
 package com.example.sgprepartidor.Home.Delivery.data.model
 
-import com.example.sgprepartidor.Home.Client.data.model.Product
+import com.example.sgprepartidor.model.Product
 
 data class DeliveryOrder (
     val id: String,

@@ -1,10 +1,14 @@
 package com.example.sgprepartidor.Register.Delivery.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.sgprepartidor.Register.Delivery.data.model.RegisterDeliveryDTO
 import com.example.sgprepartidor.Register.Delivery.domain.RegisterDeliveryUseCase
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.launch
 
 class RegisterDeliveryViewModel(private val navigateToLogin: () -> Unit) : ViewModel() {
 
@@ -45,16 +49,38 @@ class RegisterDeliveryViewModel(private val navigateToLogin: () -> Unit) : ViewM
         _password.value = password
     }
 
-    suspend fun onSubmit(registerDeliveryDTO: RegisterDeliveryDTO) {
+    fun callToApi (registerDeliveryDTO: RegisterDeliveryDTO) {
+        viewModelScope.launch {
+            val result = registerDeliveryUseCase(registerDeliveryDTO)
 
-        val result = registerDeliveryUseCase(registerDeliveryDTO)
-        result.onSuccess {
+            result.onSuccess {
             navigateToLogin()
         }
 
         result.onFailure {
             _failure.value = true
         }
+    }
+}
+
+fun onSubmit(
+    firstName: String,
+    lastName: String,
+    driverId: String,
+    email: String,
+    password: String
+) {
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            task ->
+            if(task.isSuccessful) {
+                val token = task.result
+                Log.d("Token", token)
+                callToApi(RegisterDeliveryDTO(name = firstName, email = email, password = password, fcm_token = token))
+            }
+        }
+
+
 
     }
 

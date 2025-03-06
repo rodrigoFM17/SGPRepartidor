@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material.icons.extended)
 
+    implementation("com.google.firebase:firebase-messaging-ktx:24.1.0")
     implementation(platform("com.google.firebase:firebase-bom:33.10.0")) // FCM
 
     implementation(libs.androidx.compose.runtime.livedata)  //LiveData

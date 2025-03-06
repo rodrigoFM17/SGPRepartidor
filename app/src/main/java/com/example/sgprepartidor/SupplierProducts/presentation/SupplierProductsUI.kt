@@ -12,8 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.sgprepartidor.SupplierProducts.data.model.Product
 import com.example.sgprepartidor.layouts.Container
+import com.example.sgprepartidor.model.Product
 
 @Composable
 fun SupplierProductsScreen (supplierProductsViewModel: SupplierProductsViewModel) {
