@@ -1,5 +1,6 @@
 package com.example.sgprepartidor.Login.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,8 @@ import com.example.sgprepartidor.Login.domain.LoginClientUseCase
 import com.example.sgprepartidor.Login.domain.LoginDeliveryUseCase
 
 class LoginViewModel(navigateRegisterClient: () -> Unit, navigateRegisterDelivery: () -> Unit) : ViewModel() {
+
+    private val loginClientUseCase = LoginClientUseCase()
 
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
@@ -39,7 +42,13 @@ class LoginViewModel(navigateRegisterClient: () -> Unit, navigateRegisterDeliver
         if(isDelivery){
             val result = LoginDeliveryUseCase()
         } else {
-            val result = LoginClientUseCase()
+            val result = loginClientUseCase(loginDTO)
+            Log.d("API", loginDTO.toString())
+            Log.d("API", result.toString())
+
+
         }
+
+
     }
 }

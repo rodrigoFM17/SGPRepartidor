@@ -1,5 +1,6 @@
 package com.example.sgprepartidor.Register.Client.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,7 @@ class RegisterClientViewModel(private val navigateToLogin: () -> Unit) : ViewMod
 
     suspend fun onSubmit(registerClientDTO: RegisterClientDTO) {
         val result = registerClientUseCase(registerClientDTO)
+        Log.d("API", result.toString())
         result.onSuccess {
             navigateToLogin()
         }

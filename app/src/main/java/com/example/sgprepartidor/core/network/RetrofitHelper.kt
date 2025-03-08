@@ -6,11 +6,25 @@ import com.example.sgprepartidor.Home.Delivery.data.datasource.HomeDeliveryServi
 import com.example.sgprepartidor.Login.data.datasource.LoginService
 import com.example.sgprepartidor.Register.data.datasource.RegisterService
 import com.example.sgprepartidor.SupplierProducts.data.datasource.SupplierService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RetrofitHelper {
-    private const val BASE_URL = "http://52.70.14.255:3000/"
+    private const val BASE_URL = "http://52.70.14.255/v1/"
+
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY // Muestra cuerpo de la respuesta
+    }
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .connectTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de conexión
+        .readTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de lectura
+        .writeTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de escritura
+        .build()
 
 
 
@@ -18,6 +32,7 @@ object RetrofitHelper {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build()
     }
 

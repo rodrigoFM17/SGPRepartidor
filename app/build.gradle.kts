@@ -58,6 +58,9 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx:24.1.0")
     implementation(platform("com.google.firebase:firebase-bom:33.10.0")) // FCM
 
+    implementation("com.squareup.okhttp3:okhttp:4.12.0") // Última versión de OkHttp
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
     implementation(libs.androidx.compose.runtime.livedata)  //LiveData
     implementation(libs.com.squareup.retrofit2.retrofit)
     implementation(libs.com.squareup.retrofit2.converter.json)

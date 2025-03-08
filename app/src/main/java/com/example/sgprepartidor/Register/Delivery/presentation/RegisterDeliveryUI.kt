@@ -19,8 +19,6 @@ import kotlinx.coroutines.launch
 fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel) {
 
     val firstName by registerDeliveryViewModel.firstName.observeAsState("")
-    val lastName by registerDeliveryViewModel.lastName.observeAsState("")
-    val driverId by registerDeliveryViewModel.driverId.observeAsState("")
     val email by registerDeliveryViewModel.email.observeAsState("")
     val password by registerDeliveryViewModel.password.observeAsState("")
     val failure by registerDeliveryViewModel.failure.observeAsState(false)
@@ -34,22 +32,6 @@ fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel)
             value = firstName,
             onValueChange = registerDeliveryViewModel::onChangeFirstName,
             placeholder = "Ingresa tu nombre",
-            modifier = Modifier.fillMaxWidth(),
-            spacerHeight = 30.dp
-        )
-
-        TextFieldComponent(
-            value = lastName,
-            onValueChange = registerDeliveryViewModel::onChangeLastName,
-            placeholder = "Ingresa tus apellidos",
-            modifier = Modifier.fillMaxWidth(),
-            spacerHeight = 30.dp
-        )
-
-        TextFieldComponent(
-            value = driverId,
-            onValueChange = registerDeliveryViewModel::onChangeDriverId,
-            placeholder = "Ingresa el numero de tu licencia de conducir",
             modifier = Modifier.fillMaxWidth(),
             spacerHeight = 30.dp
         )
@@ -78,8 +60,6 @@ fun RegisterDeliveryScreen(registerDeliveryViewModel: RegisterDeliveryViewModel)
             onClick = { registerDeliveryViewModel.viewModelScope.launch {
                 registerDeliveryViewModel.onSubmit(
                     firstName = firstName,
-                    lastName = lastName,
-                    driverId = driverId,
                     email = email,
                     password = password
                 )

@@ -10,9 +10,9 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RegisterService {
-    @POST("v1/delivery")
+    @POST("driver")
     suspend fun registerDelivery(@Body request: RegisterDeliveryDTO): Response<APIResponse<Delivery>>
 
-    @POST("v1/clients")
+    @POST("client")
     suspend fun registerClient(@Body request: RegisterClientDTO): Response<APIResponse<Client>>
 }

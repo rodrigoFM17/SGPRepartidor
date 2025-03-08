@@ -77,7 +77,7 @@ fun RegisterClientScreen(registerClientViewModel: RegisterClientViewModel) {
                         RegisterClientDTO(
                             name = name,
                             email = email,
-                            address = address,
+                            Address = address,
                             password = password
                         )
                     )

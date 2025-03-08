@@ -10,9 +10,9 @@ import retrofit2.http.POST
 
 interface LoginService {
 
-    @POST("ruta/client")
+    @POST("client/auth")
     suspend fun loginClient(@Body request : LoginDTO): Response<APIResponse<Client>>
 
-    @POST("ruta/delivery")
+    @POST("driver/auth")
     suspend fun loginDelivery(@Body request : LoginDTO): Response<APIResponse<Delivery>>
 }

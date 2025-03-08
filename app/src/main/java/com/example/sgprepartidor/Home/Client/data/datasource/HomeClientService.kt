@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface HomeClientService {
 
-    @GET("v1/suppliers")
+    @GET("supplier")
     suspend fun getAllSuppliers(): Response<APIResponse<Supplier>>
 }
