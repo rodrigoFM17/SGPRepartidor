@@ -22,7 +22,7 @@ class HomeDeliveryViewModel : ViewModel() {
 
         result.onSuccess {
             data ->
-            _deliveryOrder.value = data.data[0]
+            _deliveryOrder.value = data.data
         }
     }
 

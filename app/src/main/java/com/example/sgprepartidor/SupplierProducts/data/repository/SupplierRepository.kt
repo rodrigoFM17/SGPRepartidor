@@ -8,7 +8,7 @@ class SupplierRepository {
 
     val supplierService = RetrofitHelper.supplierService
 
-    suspend fun getAllProductsBySupplierId(supplierId: String): Result<APIResponse<Product>> {
+    suspend fun getAllProductsBySupplierId(supplierId: String): Result<APIResponse<List<Product>>> {
         return try {
             val response = supplierService.getAllProductsBySupplierId(supplierId)
             if(response.isSuccessful){

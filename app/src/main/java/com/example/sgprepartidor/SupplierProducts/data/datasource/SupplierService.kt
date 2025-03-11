@@ -9,5 +9,5 @@ import retrofit2.http.Path
 interface SupplierService {
 
     @GET("v1/products/{supplierId}")
-    suspend fun getAllProductsBySupplierId(@Path("supplierId") supplierId: String): Response<APIResponse<Product>>
+    suspend fun getAllProductsBySupplierId(@Path("supplierId") supplierId: String): Response<APIResponse<List<Product>>>
 }

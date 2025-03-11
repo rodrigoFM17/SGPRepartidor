@@ -18,10 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
 import com.example.sgprepartidor.layouts.Container
 import com.example.sgprepartidor.model.Supplier
-import kotlinx.coroutines.launch
 
 @Composable
 fun HomeClientScreen(homeClientViewModel: HomeClientViewModel) {
@@ -54,7 +52,7 @@ fun SupplierCard(supplier: Supplier, onSelectSupplier: (Supplier) -> Unit) {
         Spacer(modifier = Modifier.height(10.dp))
         Text( text = supplier.address)
         Spacer(modifier = Modifier.height(10.dp))
-        Text( text = supplier.contact_info)
+        Text( text = supplier.contactInfo)
     }
 
 }

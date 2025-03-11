@@ -41,7 +41,9 @@ fun NavigationWrapper() {
         composable<Login> {
             LoginScreen(loginViewModel = LoginViewModel(
                 navigateRegisterClient = { navController.navigate(RegisterClient) },
-                navigateRegisterDelivery = { navController.navigate(RegisterDelivery) }
+                navigateRegisterDelivery = { navController.navigate(RegisterDelivery) },
+                navigateToClientHome = { navController.navigate(ClientHome) },
+                navigateToDeliveryHome = { navController.navigate(DeliveryHome) }
             ))
         }
         composable<ClientHome> {

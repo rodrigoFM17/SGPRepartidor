@@ -8,9 +8,15 @@ import com.example.sgprepartidor.Login.data.model.LoginDTO
 import com.example.sgprepartidor.Login.domain.LoginClientUseCase
 import com.example.sgprepartidor.Login.domain.LoginDeliveryUseCase
 
-class LoginViewModel(navigateRegisterClient: () -> Unit, navigateRegisterDelivery: () -> Unit) : ViewModel() {
+class LoginViewModel(
+    navigateRegisterClient: () -> Unit,
+    navigateRegisterDelivery: () -> Unit,
+    private val navigateToClientHome: () -> Unit,
+    private val navigateToDeliveryHome: () -> Unit
+) : ViewModel() {
 
     private val loginClientUseCase = LoginClientUseCase()
+    private val loginDeliveryUseCase = LoginDeliveryUseCase()
 
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
@@ -40,13 +46,16 @@ class LoginViewModel(navigateRegisterClient: () -> Unit, navigateRegisterDeliver
 
     suspend fun onSubmit(loginDTO: LoginDTO, isDelivery: Boolean) {
         if(isDelivery){
-            val result = LoginDeliveryUseCase()
+            val result = loginDeliveryUseCase(loginDTO)
+            result.onSuccess{
+                navigateToDeliveryHome()
+            }
         } else {
             val result = loginClientUseCase(loginDTO)
-            Log.d("API", loginDTO.toString())
+            result.onSuccess {
+                navigateToClientHome()
+            }
             Log.d("API", result.toString())
-
-
         }
 
 

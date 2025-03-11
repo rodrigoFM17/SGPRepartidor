@@ -8,7 +8,7 @@ import com.example.sgprepartidor.model.Supplier
 class HomeClientRepositry {
     private val homeClientService = RetrofitHelper.homeClientService
 
-    suspend fun getAllSuppliers(): Result<APIResponse<Supplier>> {
+    suspend fun getAllSuppliers(): Result<APIResponse<List<Supplier>>> {
         return try {
             val response = homeClientService.getAllSuppliers()
 

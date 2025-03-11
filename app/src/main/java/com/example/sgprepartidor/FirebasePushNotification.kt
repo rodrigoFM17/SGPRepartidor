@@ -18,7 +18,6 @@ class FirebasePushNotification : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d("FCM", "Nuevo Token: $token")
-        // Puedes enviar el token a tu servidor aquí si es necesario
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

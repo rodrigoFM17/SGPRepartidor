@@ -7,7 +7,7 @@ import com.example.sgprepartidor.model.Product
 class GetAllProductsBySupplierIdUseCase {
 
     val repository = SupplierRepository()
-    suspend operator fun invoke (supplierId: String): Result<APIResponse<Product>> {
+    suspend operator fun invoke (supplierId: String): Result<APIResponse<List<Product>>> {
         val result = repository.getAllProductsBySupplierId(supplierId)
         return result
     }

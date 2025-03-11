@@ -6,7 +6,7 @@ import com.example.sgprepartidor.model.Supplier
 
 class GetAllSuppliersUseCase {
     val homeClientRepository = HomeClientRepositry()
-    suspend operator fun invoke(): Result<APIResponse<Supplier>> {
+    suspend operator fun invoke(): Result<APIResponse<List<Supplier>>> {
         val result = homeClientRepository.getAllSuppliers()
         return result
     }
