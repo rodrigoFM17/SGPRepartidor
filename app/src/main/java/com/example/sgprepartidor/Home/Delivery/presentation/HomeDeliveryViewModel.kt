@@ -7,18 +7,21 @@ import com.example.sgprepartidor.Home.Delivery.data.model.DeliveryOrder
 import com.example.sgprepartidor.Home.Delivery.data.model.UpdateStatusDTO
 import com.example.sgprepartidor.Home.Delivery.domain.GetCurrentDeliveryOrderUseCase
 import com.example.sgprepartidor.Home.Delivery.domain.MarkDeliveryOrderAsCompletedUseCase
+import com.example.sgprepartidor.Login.data.model.Delivery
+import com.example.sgprepartidor.core.storage.StorageManager
 
-class HomeDeliveryViewModel : ViewModel() {
+class HomeDeliveryViewModel(private val deliveryStorage: StorageManager<Delivery>) : ViewModel() {
 
     private val getCurrentDeliveryOrderUseCase = GetCurrentDeliveryOrderUseCase()
     private val markDeliveryOrderUseCase = MarkDeliveryOrderAsCompletedUseCase()
 
-    private val _deliveryOrder = MutableLiveData<DeliveryOrder>()
+    private val _deliveryOrder = MutableLiveData<List<DeliveryOrder>>()
 
-    val deliveryOrder: LiveData<DeliveryOrder> = _deliveryOrder
+    val deliveryOrder: LiveData<List<DeliveryOrder>> = _deliveryOrder
 
-    suspend fun getCurrentDeliveryOrder(deliveryId: String) {
-        val result = getCurrentDeliveryOrderUseCase(deliveryId)
+    suspend fun getCurrentDeliveryOrder() {
+        val delivery = deliveryStorage.getObjectInStorage()
+        val result = getCurrentDeliveryOrderUseCase(delivery.id)
 
         result.onSuccess {
             data ->

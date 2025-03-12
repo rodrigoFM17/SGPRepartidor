@@ -11,8 +11,8 @@ import retrofit2.http.Path
 
 interface HomeDeliveryService {
 
-    @GET("v1/deliveryOrder/current/{deliveryId}")
-    suspend fun getCurrentDeliveryOrder(@Path("deliveryId") deliveryId: String): Response<APIResponse<DeliveryOrder>>
+    @GET("delivery/driver/{deliveryId}")
+    suspend fun getCurrentDeliveryOrder(@Path("deliveryId") deliveryId: String): Response<APIResponse<List<DeliveryOrder>>>
 
     @PATCH("v1/deliveryOrder/{deliveryId}")
     suspend fun updateStatusDeliveryOrder(

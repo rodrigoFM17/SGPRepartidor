@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -27,48 +28,37 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeDeliveryScreen(homeDeliveryViewModel: HomeDeliveryViewModel) {
 
-    val deliveryOrder by homeDeliveryViewModel.deliveryOrder.observeAsState(null)
+    val deliveryOrders by homeDeliveryViewModel.deliveryOrder.observeAsState(emptyList())
+
+    LaunchedEffect(Unit) {
+        homeDeliveryViewModel.viewModelScope.launch {
+            homeDeliveryViewModel.getCurrentDeliveryOrder()
+        }
+    }
 
     Container(
         headerTitle = "Ordenes asignadas",
     ) {
-        if(deliveryOrder != null) {
-            DeliveryOrderCard(deliveryOrder!!, {
-                homeDeliveryViewModel.viewModelScope.launch {
-                    homeDeliveryViewModel.markDeliveryOrderAsCompleted(deliveryOrder!!.id, UpdateStatusDTO(status = "completed"))
-                }
-            })
-        } else {
-            Text(
-                text = "Aun no tienes un pedido asignado",
-                color = Color(0xFF7AB317),
-                fontWeight = FontWeight.Bold,
-                fontSize = 40.sp
-                )
+        LazyColumn {
+            items(deliveryOrders) {
+                deliveryOrder ->
+                DeliveryOrderCard(deliveryOrder)
+            }
         }
+
     }
 }
 
 @Composable
-fun DeliveryOrderCard (deliveryOrder: DeliveryOrder, onClick: () -> Unit) {
+fun DeliveryOrderCard (deliveryOrder: DeliveryOrder) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFF353535))
             .padding(20.dp),
     ) {
-        Text( text = deliveryOrder.address)
+        Text( text = "id proveedor: ${deliveryOrder.supplierId}")
         Spacer(modifier = Modifier.height(20.dp))
-        Text( text = "para: ${deliveryOrder.clientName}")
-        Spacer(modifier = Modifier.height(20.dp))
-        Text( text = "de: ${deliveryOrder.supplierName}")
-        Spacer(modifier = Modifier.height(20.dp))
-        Text( text = "${deliveryOrder.deliveryProducts.size} productos")
-        Spacer(modifier = Modifier.height(20.dp))
-        Button(
-            onClick = onClick
-        ) {
-            Text( text = "Marcar orden como completada")
-        }
+        Text( text = "id cliente ${deliveryOrder.clientId}")
     }
 }

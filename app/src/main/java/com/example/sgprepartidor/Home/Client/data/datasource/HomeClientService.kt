@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface HomeClientService {
 
-    @GET("supplier")
+    @GET("supplier/?limit=10&page=1&orderDir=asc&orderBy=id")
     suspend fun getAllSuppliers(): Response<APIResponse<List<Supplier>>>
 }

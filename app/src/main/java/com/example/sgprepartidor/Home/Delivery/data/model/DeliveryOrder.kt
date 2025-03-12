@@ -1,13 +1,18 @@
 package com.example.sgprepartidor.Home.Delivery.data.model
 
-import com.example.sgprepartidor.model.Product
+import com.google.gson.annotations.SerializedName
 
 data class DeliveryOrder (
-    val id: String,
-    val clientName: String,
-    val address: String,
-    val supplierName: String,
+    @SerializedName("delivery_id")
+    val deliveryId: String,
+    @SerializedName("driver_id")
+    val driverId: String,
+    @SerializedName("client_id")
+    val clientId: String,
+    @SerializedName("supplier_id")
+    val supplierId: String,
+    @SerializedName("delivery_date")
     val deliveryDate: String,
-    val deliveryProducts: List<Product>,
-    val accepted: Boolean,
+    @SerializedName("status")
+    val status: String
 )

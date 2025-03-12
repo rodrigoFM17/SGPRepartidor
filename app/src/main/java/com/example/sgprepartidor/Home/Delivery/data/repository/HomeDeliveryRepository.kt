@@ -8,7 +8,7 @@ import com.example.sgprepartidor.core.network.model.APIResponse
 class HomeDeliveryRepository {
     private val homeDeliveryService = RetrofitHelper.homeDeliveryService
 
-    suspend fun getCurrentDeliveryOrder (deliveryId: String): Result<APIResponse<DeliveryOrder>> {
+    suspend fun getCurrentDeliveryOrder (deliveryId: String): Result<APIResponse<List<DeliveryOrder>>> {
         return try {
             val response = homeDeliveryService.getCurrentDeliveryOrder(deliveryId)
 

@@ -1,7 +1,6 @@
 package com.example.sgprepartidor.core.network
 
 import com.example.sgprepartidor.Home.Client.data.datasource.HomeClientService
-import com.example.sgprepartidor.Home.Client.presentation.HomeClientViewModel
 import com.example.sgprepartidor.Home.Delivery.data.datasource.HomeDeliveryService
 import com.example.sgprepartidor.Login.data.datasource.LoginService
 import com.example.sgprepartidor.Register.data.datasource.RegisterService
@@ -16,14 +15,14 @@ object RetrofitHelper {
     private const val BASE_URL = "http://3.226.75.51/v1/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY // Muestra cuerpo de la respuesta
+        level = HttpLoggingInterceptor.Level.BODY
     }
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
-        .connectTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de conexión
-        .readTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de lectura
-        .writeTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de escritura
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .build()
 
 
