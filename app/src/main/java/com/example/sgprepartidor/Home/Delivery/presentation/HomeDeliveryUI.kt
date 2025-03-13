@@ -61,4 +61,5 @@ fun DeliveryOrderCard (deliveryOrder: DeliveryOrder) {
         Spacer(modifier = Modifier.height(20.dp))
         Text( text = "id cliente ${deliveryOrder.clientId}", fontSize = 30.sp, color = Color.White)
     }
+    Spacer(modifier = Modifier.height(20.dp))
 }

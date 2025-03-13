@@ -63,5 +63,6 @@ fun SupplierCard(supplier: Supplier, onSelectSupplier: (Supplier) -> Unit) {
         Spacer(modifier = Modifier.height(10.dp))
         Text( text = supplier.contactInfo, color = Color.White)
     }
+    Spacer(modifier = Modifier.height(20.dp))
 
 }

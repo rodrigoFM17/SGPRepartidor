@@ -71,6 +71,6 @@ fun ProductCard(product: Product, onSelectProduct: (Product) -> Unit) {
             onClick = {onSelectProduct(product)},
             text = "Pedir este producto"
         )
-
     }
+    Spacer(modifier = Modifier.height(20.dp))
 }

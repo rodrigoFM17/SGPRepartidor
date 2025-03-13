@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -42,6 +43,10 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.room.runtime) //room
+    implementation(libs.room.ktx) //room
+    ksp(libs.room.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)     // ViewModel
