@@ -1,9 +1,8 @@
 package com.example.sgprepartidor.Home.Client.data.repository
 
-import com.example.sgprepartidor.Home.Delivery.data.model.DeliveryOrder
 import com.example.sgprepartidor.core.network.RetrofitHelper
 import com.example.sgprepartidor.core.network.model.APIResponse
-import com.example.sgprepartidor.model.Supplier
+import com.example.sgprepartidor.shared.model.Supplier
 
 class HomeClientRepositry {
     private val homeClientService = RetrofitHelper.homeClientService

@@ -1,5 +1,6 @@
 package com.example.sgprepartidor.SupplierProducts.presentation
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,20 +9,21 @@ import com.example.sgprepartidor.Login.data.model.Client
 import com.example.sgprepartidor.SupplierProducts.data.model.NewDeliveryDTO
 import com.example.sgprepartidor.SupplierProducts.domain.CreateNewDeliveryUseCase
 import com.example.sgprepartidor.SupplierProducts.domain.GetAllProductsBySupplierIdUseCase
+import com.example.sgprepartidor.SupplierProducts.domain.InsertDeliveryOrderedUseCase
+import com.example.sgprepartidor.core.data.local.deliverysOrdered.entities.DeliveryOrderedEntity
 import com.example.sgprepartidor.core.storage.StorageManager
-import com.example.sgprepartidor.model.Product
-import com.example.sgprepartidor.model.Supplier
+import com.example.sgprepartidor.shared.model.Product
+import com.example.sgprepartidor.shared.model.Supplier
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supplier>, private val clientStorage: StorageManager<Client>) : ViewModel() {
+class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supplier>, private val clientStorage: StorageManager<Client>, context: Context) : ViewModel() {
 
     private val getAllProductsBySupplierIdUseCase = GetAllProductsBySupplierIdUseCase()
     private val createNewDeliveryUseCase = CreateNewDeliveryUseCase()
+    private val insertDeliveryOrderedUseCase = InsertDeliveryOrderedUseCase(context = context)
 
     private val _supplier = MutableLiveData<Supplier>()
     val supplier: LiveData<Supplier> = _supplier
@@ -76,5 +78,10 @@ class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supp
         result.onSuccess {
             _message.value = "Pedido creado con exito"
         }
+        insertDeliveryOrderedUseCase(deliveryOrdered = DeliveryOrderedEntity(
+            date = Date(),
+            productName = product.name,
+            supplierName = supplier.name
+        ))
     }
 }

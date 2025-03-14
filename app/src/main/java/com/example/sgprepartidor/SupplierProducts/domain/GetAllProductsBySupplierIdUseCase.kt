@@ -2,7 +2,7 @@ package com.example.sgprepartidor.SupplierProducts.domain
 
 import com.example.sgprepartidor.SupplierProducts.data.repository.SupplierRepository
 import com.example.sgprepartidor.core.network.model.APIResponse
-import com.example.sgprepartidor.model.Product
+import com.example.sgprepartidor.shared.model.Product
 
 class GetAllProductsBySupplierIdUseCase {
 

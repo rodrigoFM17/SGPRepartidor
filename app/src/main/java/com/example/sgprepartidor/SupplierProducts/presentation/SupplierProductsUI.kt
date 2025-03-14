@@ -1,7 +1,6 @@
 package com.example.sgprepartidor.SupplierProducts.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import com.example.sgprepartidor.components.ButtonComponent
 import com.example.sgprepartidor.layouts.Container
-import com.example.sgprepartidor.model.Product
+import com.example.sgprepartidor.shared.model.Product
 import kotlinx.coroutines.launch
 
 @Composable

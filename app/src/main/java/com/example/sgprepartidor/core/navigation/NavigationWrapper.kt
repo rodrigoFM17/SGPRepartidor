@@ -20,7 +20,7 @@ import com.example.sgprepartidor.Register.Delivery.presentation.RegisterDelivery
 import com.example.sgprepartidor.SupplierProducts.presentation.SupplierProductsScreen
 import com.example.sgprepartidor.SupplierProducts.presentation.SupplierProductsViewModel
 import com.example.sgprepartidor.core.storage.StorageManager
-import com.example.sgprepartidor.model.Supplier
+import com.example.sgprepartidor.shared.model.Supplier
 import com.google.gson.reflect.TypeToken
 
 @Composable

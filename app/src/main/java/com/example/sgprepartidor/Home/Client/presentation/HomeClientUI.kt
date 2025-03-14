@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import com.example.sgprepartidor.layouts.Container
-import com.example.sgprepartidor.model.Supplier
+import com.example.sgprepartidor.shared.model.Supplier
 import kotlinx.coroutines.launch
 
 @Composable

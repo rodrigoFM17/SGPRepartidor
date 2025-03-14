@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sgprepartidor.Home.Client.domain.GetAllSuppliersUseCase
 import com.example.sgprepartidor.core.storage.StorageManager
-import com.example.sgprepartidor.model.Supplier
+import com.example.sgprepartidor.shared.model.Supplier
 
 class HomeClientViewModel(
     private val navigateToSupplierProducts: () -> Unit,

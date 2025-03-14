@@ -1,4 +1,4 @@
-package com.example.sgprepartidor.model
+package com.example.sgprepartidor.shared.model
 
 import com.google.gson.annotations.SerializedName
 
