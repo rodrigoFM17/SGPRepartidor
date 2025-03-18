@@ -79,9 +79,18 @@ class LocationService() : Service() {
             }
         }
 
-        locationWebsocket = LocationWebsocketRepository("ws://3.226.75.51/ws?order_id=1&type=driver")
-        locationWebsocket?.connect()
         startForegroundService()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        val orderId = intent?.getStringExtra("orderId") ?: "-1"
+
+        locationWebsocket = LocationWebsocketRepository("ws://3.226.75.51/ws?order_id=${orderId}&type=driver")
+        locationWebsocket?.connect()
+
+        startForegroundService()
+        return START_STICKY
     }
 
     private fun createNotification(): Notification {
@@ -107,7 +116,7 @@ class LocationService() : Service() {
             val channel = NotificationChannel(
                 channelId,
                 channelName,
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_HIGH
             )
             getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
         }

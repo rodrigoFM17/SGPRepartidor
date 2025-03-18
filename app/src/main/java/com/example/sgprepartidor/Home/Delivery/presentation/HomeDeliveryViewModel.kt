@@ -2,6 +2,7 @@ package com.example.sgprepartidor.Home.Delivery.presentation
 
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,7 +24,7 @@ import java.util.Date
 class HomeDeliveryViewModel(
     private val deliveryStorage: StorageManager<Delivery>,
     private val context: Context,
-    private val navigateDeliverysOrdersCompleted: () -> Unit
+    private val navigateDeliverysOrdersCompleted: () -> Unit,
 ) : ViewModel() {
 
     private val getCurrentDeliveryOrderUseCase = GetCurrentDeliveryOrderUseCase()
@@ -44,7 +45,7 @@ class HomeDeliveryViewModel(
 
         result.onSuccess {
             data ->
-            _deliveryOrder.value = data.data
+            _deliveryOrder.value = data.data ?: emptyList()
         }
     }
 
@@ -62,8 +63,11 @@ class HomeDeliveryViewModel(
     }
 
 
-    fun startListeningLocation () {
-        ContextCompat.startForegroundService(context, Intent(context, LocationService::class.java))
+    fun startDelivery (order: DeliveryOrder) {
+        val intent = Intent(context, LocationService::class.java).apply {
+            putExtra("orderId", order.deliveryId)
+        }
+        ContextCompat.startForegroundService(context, intent)
     }
 
 

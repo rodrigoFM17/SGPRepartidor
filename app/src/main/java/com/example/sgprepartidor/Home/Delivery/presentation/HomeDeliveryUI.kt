@@ -82,7 +82,7 @@ fun HomeDeliveryScreen(homeDeliveryViewModel: HomeDeliveryViewModel) {
                     locationPermission = locationPermission.value,
                     onClick = {
                         homeDeliveryViewModel.viewModelScope.launch {
-                            homeDeliveryViewModel.startListeningLocation()
+                            homeDeliveryViewModel.startDelivery(deliveryOrder)
                         }
                     },
                     requestPermission = requestPermissionLauncher

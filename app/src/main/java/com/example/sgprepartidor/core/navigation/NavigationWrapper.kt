@@ -11,6 +11,7 @@ import com.example.sgprepartidor.DeliverysOrderedRecord.presentation.DeliverysOr
 import com.example.sgprepartidor.DeliverysOrderedRecord.presentation.DeliverysOrderedScreen
 import com.example.sgprepartidor.Home.Client.presentation.HomeClientScreen
 import com.example.sgprepartidor.Home.Client.presentation.HomeClientViewModel
+import com.example.sgprepartidor.Home.Delivery.data.model.DeliveryOrder
 import com.example.sgprepartidor.Home.Delivery.presentation.HomeDeliveryScreen
 import com.example.sgprepartidor.Home.Delivery.presentation.HomeDeliveryViewModel
 import com.example.sgprepartidor.Login.data.model.Client
