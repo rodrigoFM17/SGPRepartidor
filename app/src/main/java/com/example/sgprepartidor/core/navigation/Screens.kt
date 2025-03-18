@@ -19,3 +19,9 @@ object DeliveryHome
 
 @Serializable
 object SupplierProducts
+
+@Serializable
+object DeliverysCompletedRecord
+
+@Serializable
+object DeliverysOrderedRecord

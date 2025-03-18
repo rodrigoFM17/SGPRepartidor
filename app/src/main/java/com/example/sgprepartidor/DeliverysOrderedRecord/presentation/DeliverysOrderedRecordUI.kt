@@ -16,9 +16,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
-fun DeliveryOrderedScreen(deliverysOrderedRecordViewModel: DeliverysOrderedRecordViewModel) {
+fun DeliverysOrderedScreen(deliverysOrderedRecordViewModel: DeliverysOrderedRecordViewModel) {
 
     val deliverysOrdered by deliverysOrderedRecordViewModel.deliverysOrdered.observeAsState(emptyList())
 
@@ -31,9 +33,17 @@ fun DeliveryOrderedScreen(deliverysOrderedRecordViewModel: DeliverysOrderedRecor
     Container(
         headerTitle = "Historial de tus Pedidos"
     ) {
+        Row (
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text( text = "Fecha", modifier = Modifier.weight(1f))
+            Text( text = "Producto", modifier = Modifier.weight(1f))
+            Text( text = "Proveedor", modifier = Modifier.weight(1f))
+        }
         LazyColumn(
             modifier = Modifier.fillMaxWidth()
         ) {
+
             itemsIndexed(deliverysOrdered) {
                 index, deliveryOrdered -> DeliveryOrderedRow(
                     deliveryOrdered,
@@ -41,7 +51,6 @@ fun DeliveryOrderedScreen(deliverysOrderedRecordViewModel: DeliverysOrderedRecor
                 )
             }
         }
-
     }
 }
 
@@ -52,7 +61,7 @@ fun DeliveryOrderedRow(deliveryOrdered: DeliveryOrderedEntity, color: Color) {
             .fillMaxWidth()
             .background(color = color)
     ) {
-        Text( text = deliveryOrdered.date.toString(), modifier = Modifier.weight(1f))
+        Text( text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(deliveryOrdered.date), modifier = Modifier.weight(1f))
         Text( text = deliveryOrdered.productName, modifier = Modifier.weight(1f))
         Text( text = deliveryOrdered.supplierName, modifier = Modifier.weight(1f))
     }

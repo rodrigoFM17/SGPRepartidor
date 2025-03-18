@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     id("com.google.gms.google-services")
-    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 }
 
 android {
@@ -46,7 +46,7 @@ dependencies {
 
     implementation(libs.room.runtime) //room
     implementation(libs.room.ktx) //room
-    ksp(libs.room.compiler)
+    ksp(libs.room.compiler) // room
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)     // ViewModel
@@ -72,6 +72,11 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)    //Navegation
     implementation(libs.kotlinx.serialization.json)     //Navegation
+
+    implementation("androidx.activity:activity-ktx:1.8.0") // Última versión de activity-ktx
+    implementation("androidx.fragment:fragment-ktx:1.6.2") // Para usar registerForActivityResult en Fragment
+
+    implementation("com.google.android.gms:play-services-location:21.0.1") //ubicacon
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

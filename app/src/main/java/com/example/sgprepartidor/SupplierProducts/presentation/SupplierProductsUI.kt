@@ -40,6 +40,11 @@ fun SupplierProductsScreen (supplierProductsViewModel: SupplierProductsViewModel
     Container(
         headerTitle = "Productos de ${supplier?.name}"
     ) {
+
+        ButtonComponent(
+            text = "Ver historial de pedidos",
+            onClick = supplierProductsViewModel::navigateToDeliverysRecord
+        )
         message?.let { Text(text = it, color = Color.White) }
 
         LazyColumn {

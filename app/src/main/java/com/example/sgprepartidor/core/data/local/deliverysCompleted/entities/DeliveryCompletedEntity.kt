@@ -10,7 +10,7 @@ data class DeliveryCompletedEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @ColumnInfo(name = "date")
-    val date: Date,
+    val date: Long,
     @ColumnInfo(name = "product_name")
     val productName: String,
     @ColumnInfo(name = "client_name")

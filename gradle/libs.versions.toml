@@ -16,7 +16,7 @@ savedState = "2.8.7"
 lifecycleViewModelKtx = "2.8.7"
 navigationCompose = "2.8.5"
 kotlinSerialization = "1.6.3"
-room = "2.6.1"
+room = "2.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

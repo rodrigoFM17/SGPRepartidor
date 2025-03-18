@@ -1,6 +1,8 @@
 package com.example.sgprepartidor.Home.Delivery.presentation
 
 import android.content.Context
+import android.content.Intent
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +11,20 @@ import com.example.sgprepartidor.Home.Delivery.data.model.UpdateStatusDTO
 import com.example.sgprepartidor.Home.Delivery.domain.GetCurrentDeliveryOrderUseCase
 import com.example.sgprepartidor.Home.Delivery.domain.InsertDeliveryCompletedUseCase
 import com.example.sgprepartidor.Home.Delivery.domain.MarkDeliveryOrderAsCompletedUseCase
+import com.example.sgprepartidor.Home.Delivery.domain.services.LocationService
 import com.example.sgprepartidor.Login.data.model.Delivery
 import com.example.sgprepartidor.core.data.local.deliverysCompleted.entities.DeliveryCompletedEntity
 import com.example.sgprepartidor.core.storage.StorageManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.time.Instant
 import java.util.Date
 
-class HomeDeliveryViewModel(private val deliveryStorage: StorageManager<Delivery>, context: Context) : ViewModel() {
+class HomeDeliveryViewModel(
+    private val deliveryStorage: StorageManager<Delivery>,
+    private val context: Context,
+    private val navigateDeliverysOrdersCompleted: () -> Unit
+) : ViewModel() {
 
     private val getCurrentDeliveryOrderUseCase = GetCurrentDeliveryOrderUseCase()
     private val markDeliveryOrderUseCase = MarkDeliveryOrderAsCompletedUseCase()
@@ -23,6 +33,10 @@ class HomeDeliveryViewModel(private val deliveryStorage: StorageManager<Delivery
     private val _deliveryOrder = MutableLiveData<List<DeliveryOrder>>()
 
     val deliveryOrder: LiveData<List<DeliveryOrder>> = _deliveryOrder
+
+    fun navigateToDeliverysRecord() {
+        navigateDeliverysOrdersCompleted()
+    }
 
     suspend fun getCurrentDeliveryOrder() {
         val delivery = deliveryStorage.getObjectInStorage()
@@ -39,12 +53,17 @@ class HomeDeliveryViewModel(private val deliveryStorage: StorageManager<Delivery
         result.onSuccess {
 
             insertDeliveryCompletedUseCase(DeliveryCompletedEntity(
-                date = Date(),
+                date = System.currentTimeMillis(),
                 supplierName = deliveryOrderId,
                 productName = deliveryOrderId,
                 clientName = deliveryOrderId
             ))
         }
+    }
+
+
+    fun startListeningLocation () {
+        ContextCompat.startForegroundService(context, Intent(context, LocationService::class.java))
     }
 
 

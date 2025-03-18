@@ -19,7 +19,12 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supplier>, private val clientStorage: StorageManager<Client>, context: Context) : ViewModel() {
+class SupplierProductsViewModel(
+    private val supplierStorage: StorageManager<Supplier>,
+    private val clientStorage: StorageManager<Client>,
+    context: Context,
+    private val navigateDeliverysOrderedRecord: () -> Unit
+    ) : ViewModel() {
 
     private val getAllProductsBySupplierIdUseCase = GetAllProductsBySupplierIdUseCase()
     private val createNewDeliveryUseCase = CreateNewDeliveryUseCase()
@@ -37,6 +42,9 @@ class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supp
     private val _message = MutableLiveData<String?>()
     val message: LiveData<String?> = _message
 
+    fun navigateToDeliverysRecord () {
+        navigateDeliverysOrderedRecord()
+    }
     suspend fun getAllProductsBySupplierId() {
         val supplier = supplierStorage.getObjectInStorage()
         _supplier.value = supplier
@@ -79,7 +87,7 @@ class SupplierProductsViewModel(private val supplierStorage: StorageManager<Supp
             _message.value = "Pedido creado con exito"
         }
         insertDeliveryOrderedUseCase(deliveryOrdered = DeliveryOrderedEntity(
-            date = Date(),
+            date = System.currentTimeMillis(),
             productName = product.name,
             supplierName = supplier.name
         ))

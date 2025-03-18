@@ -5,6 +5,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.sgprepartidor.DeliverysCompletedRecord.presentation.DeliveryCompletedViewModel
+import com.example.sgprepartidor.DeliverysCompletedRecord.presentation.DeliverysCompletedScreen
+import com.example.sgprepartidor.DeliverysOrderedRecord.presentation.DeliverysOrderedRecordViewModel
+import com.example.sgprepartidor.DeliverysOrderedRecord.presentation.DeliverysOrderedScreen
 import com.example.sgprepartidor.Home.Client.presentation.HomeClientScreen
 import com.example.sgprepartidor.Home.Client.presentation.HomeClientViewModel
 import com.example.sgprepartidor.Home.Delivery.presentation.HomeDeliveryScreen
@@ -60,12 +64,28 @@ fun NavigationWrapper() {
             ))
         }
         composable<DeliveryHome> {
-            HomeDeliveryScreen(homeDeliveryViewModel = HomeDeliveryViewModel(deliveryStorage = deliveryStorage))
+            HomeDeliveryScreen(homeDeliveryViewModel = HomeDeliveryViewModel(
+                deliveryStorage = deliveryStorage,
+                context = context,
+                navigateDeliverysOrdersCompleted = {navController.navigate(DeliverysOrderedRecord)}
+            ))
         }
         composable<SupplierProducts> {
             SupplierProductsScreen(supplierProductsViewModel = SupplierProductsViewModel(
                 supplierStorage = supplierStorage,
-                clientStorage = clientStorage
+                clientStorage = clientStorage,
+                context = context,
+                navigateDeliverysOrderedRecord = { navController.navigate(DeliverysOrderedRecord)}
+            ))
+        }
+        composable<DeliverysCompletedRecord> {
+            DeliverysCompletedScreen(DeliveryCompletedViewModel(
+                context = context,
+            ))
+        }
+        composable<DeliverysOrderedRecord> {
+            DeliverysOrderedScreen(DeliverysOrderedRecordViewModel(
+                context = context
             ))
         }
 
